@@ -129,7 +129,7 @@ int main()
 		ImGui::NewFrame();
 
 		Texture currentTexture = (framesStill % 2 == 1) ? texture1 : texture2;
-		Texture lastTexture = (framesStill % 2 == 2) ? texture1 : texture2;
+		Texture lastTexture = (framesStill % 2 == 0) ? texture1 : texture2;
 		FrameBuffer currentFramebuffer = (framesStill % 2 == 1) ? framebuffer2 : framebuffer1;
 
 		glBindFramebuffer(GL_FRAMEBUFFER, currentFramebuffer.buf);
@@ -157,6 +157,7 @@ int main()
 		defaultShader.U1i("showNormals", mygui.showNormals);
 		if (!mygui.renderMode) defaultShader.U1fv("objects", MAX_OBJECTS * 20, scene.sceneData1D);
 		defaultShader.U3f("skyboxRotation", mygui.skybox->rotation[0], mygui.skybox->rotation[1], mygui.skybox->rotation[2]);
+		defaultShader.U1f("highestColValue", mygui.skybox->highestColValue);
 		defaultShader.U1i("planeGrid", mygui.planeGrid);
 		defaultShader.U3f("gridCol2", mygui.gridCol2[0], mygui.gridCol2[1], mygui.gridCol2[2]);
 		defaultShader.U1f("tileSize", mygui.tileSize);
